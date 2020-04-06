@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:	
+    branches:	
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js for use with actions
+      with:
+        node-version: 12.8
+      uses: actions/setup-node@v1.1.0
+    - name: npm install build
+      run: |
+        npm ci
+        npm run build-package
+    - name: Deploy
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: dist
+        PUBLISH_DIR: dist
+        SCRIPT_MODE: true
+      run: |
+        wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v2/entrypoint.sh
+        bash ./entrypoint.sh
