@@ -121,6 +121,8 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValue
 	 */
 	@Output() ready = new EventEmitter<CKEditor4.EventInfo>();
 
+	@Output() created = new EventEmitter<CKEditor4.EventInfo>();
+
 	/**
 	 * Fires when the editor data is loaded, e.g. after calling setData()
 	 * https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#method-setData
@@ -234,9 +236,16 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValue
 			this.config = this.ensureDivareaPlugin( this.config || {} );
 		}
 
+		CKEDITOR.on('instanceCreated', evt => {
+			this.ngZone.run( () => {
+				this.created.emit( evt );
+			} );
+		});
+
 		const instance: CKEditor4.Editor = this.type === CKEditor4.EditorType.INLINE
 			? CKEDITOR.inline( element, this.config )
 			: CKEDITOR.replace( element, this.config );
+
 
 		instance.once( 'instanceReady', evt => {
 			this.instance = instance;
