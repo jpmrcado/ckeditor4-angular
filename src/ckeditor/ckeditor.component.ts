@@ -121,6 +121,7 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValue
 	 */
 	@Output() ready = new EventEmitter<CKEditor4.EventInfo>();
 
+	
 	@Output() created = new EventEmitter<CKEditor4.EventInfo>();
 
 	/**
