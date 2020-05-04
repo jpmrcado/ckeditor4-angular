@@ -64,6 +64,8 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValue
 	 */
 	@Input() type: CKEditor4.EditorType = CKEditor4.EditorType.CLASSIC;
 
+	@Input() UI: CKEditor4.EditorType = CKEditor4.EditorType.CLASSIC;
+
 	/**
 	 * Keeps track of the editor's data.
 	 *
@@ -247,6 +249,7 @@ export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValue
 			? CKEDITOR.inline( element, this.config )
 			: CKEDITOR.replace( element, this.config );
 
+		instance.UI = this.UI;
 
 		instance.once( 'instanceReady', evt => {
 			this.instance = instance;
