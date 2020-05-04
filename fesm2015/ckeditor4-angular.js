@@ -58,6 +58,7 @@ let CKEditorComponent = CKEditorComponent_1 = class CKEditorComponent {
          * to learn more.
          */
         this.type = "classic" /* CLASSIC */;
+        this.UI = "classic" /* CLASSIC */;
         /**
          * Fires when the editor is ready. It corresponds with the `editor#instanceReady`
          * https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-instanceReady
@@ -189,6 +190,7 @@ let CKEditorComponent = CKEditorComponent_1 = class CKEditorComponent {
         const instance = this.type === "inline" /* INLINE */
             ? CKEDITOR.inline(element, this.config)
             : CKEDITOR.replace(element, this.config);
+        instance.UI = this.UI;
         instance.once('instanceReady', evt => {
             this.instance = instance;
             // Read only state may change during instance initialization.
@@ -296,6 +298,9 @@ __decorate([
 __decorate([
     Input()
 ], CKEditorComponent.prototype, "type", void 0);
+__decorate([
+    Input()
+], CKEditorComponent.prototype, "UI", void 0);
 __decorate([
     Input()
 ], CKEditorComponent.prototype, "data", null);

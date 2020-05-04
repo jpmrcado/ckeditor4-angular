@@ -31,6 +31,7 @@ export declare class CKEditorComponent implements AfterViewInit, OnDestroy, Cont
      * to learn more.
      */
     type: CKEditor4.EditorType;
+    UI: CKEditor4.EditorType;
     /**
      * Keeps track of the editor's data.
      *

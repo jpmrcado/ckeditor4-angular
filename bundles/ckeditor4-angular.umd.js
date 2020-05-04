@@ -256,6 +256,7 @@
              * to learn more.
              */
             this.type = "classic" /* CLASSIC */;
+            this.UI = "classic" /* CLASSIC */;
             /**
              * Fires when the editor is ready. It corresponds with the `editor#instanceReady`
              * https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-instanceReady
@@ -399,6 +400,7 @@
             var instance = this.type === "inline" /* INLINE */
                 ? CKEDITOR.inline(element, this.config)
                 : CKEDITOR.replace(element, this.config);
+            instance.UI = this.UI;
             instance.once('instanceReady', function (evt) {
                 _this.instance = instance;
                 // Read only state may change during instance initialization.
@@ -508,6 +510,9 @@
         __decorate([
             core.Input()
         ], CKEditorComponent.prototype, "type", void 0);
+        __decorate([
+            core.Input()
+        ], CKEditorComponent.prototype, "UI", void 0);
         __decorate([
             core.Input()
         ], CKEditorComponent.prototype, "data", null);
